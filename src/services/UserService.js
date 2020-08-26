@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-const TechService = require('./ServerTech')
+const TechService = require('./TechService')
 
 module.exports = {
   async list() {
@@ -12,14 +12,16 @@ module.exports = {
 
     return user;
   },
-  async store(name, email, tech) {
+  async store(name, email, techs) {
 
     const user = await User.create({
       name,
       email
     })
 
-    await TechService.store(user.id, tech)
+    const names = techs.split(', ');
+
+    await TechService.store(user.id, names)
 
     return user;
   },
