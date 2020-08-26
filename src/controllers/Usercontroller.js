@@ -1,51 +1,46 @@
-const User = require("../models/User");
-
-const createTech = require('../services/CreateTech');
-const IndexUser = require('../services/IndexUser');
+const { list, store, show, update, destroy } = require('../services/UserService');
 
 module.exports = {
   async list(req, res) {
-    const users = await User.findAll();
 
-    return res.json(users);
+    const user =  await list();
+
+    return res.json(user);
   },
   async store(req, res) {
     const { name, email, tech } = req.body;
 
-    const user = await User.create({
+    const user = await store(
       name,
-      email
-    })
+      email,
+      tech
+    );
 
-    await createTech(user.id, tech)
-
-    return res.json( await IndexUser(user.id))
+    return res.json(user)
   },
   async show(req, res) {
     const { id } = req.params;
-    // const user = await User.findByPk(id);
 
-    return res.json( await IndexUser(id) );
+    const user = await show(id);
+
+    return res.json(user);
   },
   async update(req, res) {
     const { id } = req.params;
     const { name, email } = req.body;
 
-    const user = await User.findByPk(id);
-
-    user.update({
+    const user = await update(
+      id,
       name,
       email
-    })
+    )
 
     return res.json(user);
   },
   async delete(req, res) {
     const { id } = req.params;
 
-    const user = await User.findByPk(id);
-
-    user.destroy();
+    await destroy(id);
 
     return res.send();
   }
