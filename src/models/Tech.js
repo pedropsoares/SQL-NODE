@@ -4,12 +4,12 @@ class Tech extends Model {
   static init(sequelize) {
     super.init({
       name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
     }, {
       sequelize,
-      tableName: 'techs'
-    })
+      tableName: 'techs',
+    });
   }
 
   static associate(models) {

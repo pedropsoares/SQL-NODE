@@ -4,21 +4,21 @@ class Address extends Model {
   static init(sequelize) {
     super.init({
       zipcode: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       street: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       number: {
-        type: DataTypes.INTEGER
-      }
+        type: DataTypes.INTEGER,
+      },
     }, {
-      sequelize
-    })
+      sequelize,
+    });
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id' , as: 'owner'});
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'owner' });
   }
 }
 

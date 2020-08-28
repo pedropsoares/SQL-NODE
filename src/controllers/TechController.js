@@ -7,8 +7,8 @@ module.exports = {
 
     const names = techs.split(', ');
 
-    await store(user_id, names)
+    await store(user_id, names);
 
     return res.json(names);
-  }
-}
+  },
+};

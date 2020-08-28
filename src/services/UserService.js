@@ -1,35 +1,32 @@
 const User = require('../models/User');
 
-const TechService = require('./TechService')
+const TechService = require('./TechService');
 
 module.exports = {
   async list() {
-
     const user = await User.findAll({
       attributes: ['id', 'name', 'email'],
-      include: { association: 'techs', attributes: ['name'], through: { attributes: [] } }
+      include: { association: 'techs', attributes: ['name'], through: { attributes: [] } },
     });
 
     return user;
   },
   async store(name, email, techs) {
-
     const user = await User.create({
       name,
-      email
-    })
+      email,
+    });
 
     const names = techs.split(', ');
 
-    await TechService.store(user.id, names)
+    await TechService.store(user.id, names);
 
     return user;
   },
   async show(user_id) {
-
     const user = await User.findByPk(user_id, {
       attributes: ['name', 'email'],
-      include: { association: 'techs', attributes: ['name'], through: { attributes: [] } }
+      include: { association: 'techs', attributes: ['name'], through: { attributes: [] } },
     });
 
     return user;
@@ -39,8 +36,8 @@ module.exports = {
 
     user.update({
       name,
-      email
-    })
+      email,
+    });
 
     return user;
   },
@@ -48,5 +45,5 @@ module.exports = {
     const user = await User.findByPk(user_id);
 
     user.destroy();
-  }
-}
+  },
+};

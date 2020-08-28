@@ -1,9 +1,10 @@
-const { list, store, show, update, destroy } = require('../services/UserService');
+const {
+  list, store, show, update, destroy,
+} = require('../services/UserService');
 
 module.exports = {
   async list(req, res) {
-
-    const user =  await list();
+    const user = await list();
 
     return res.json(user);
   },
@@ -13,10 +14,10 @@ module.exports = {
     const user = await store(
       name,
       email,
-      tech
+      tech,
     );
 
-    return res.json(user)
+    return res.json(user);
   },
   async show(req, res) {
     const { id } = req.params;
@@ -32,8 +33,8 @@ module.exports = {
     const user = await update(
       id,
       name,
-      email
-    )
+      email,
+    );
 
     return res.json(user);
   },
@@ -43,5 +44,5 @@ module.exports = {
     await destroy(id);
 
     return res.send();
-  }
-}
+  },
+};
