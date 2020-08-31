@@ -7,8 +7,11 @@ module.exports = {
 
     const names = techs.split(', ');
 
-    await store(user_id, names);
-
-    return res.json(names);
+    try {
+      const response = await store(user_id, names);
+      return res.json(response);
+    } catch (error) {
+      return res.status(400).send(error);
+    }
   },
 };
