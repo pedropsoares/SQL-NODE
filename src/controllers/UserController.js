@@ -1,5 +1,5 @@
 const {
-  list, store, show, update, destroy,
+  list, create, show, update, destroy,
 } = require('../services/UserService');
 
 module.exports = {
@@ -9,15 +9,13 @@ module.exports = {
     return res.json(user);
   },
   async store(req, res) {
-    const { name, email, tech } = req.body;
+    const user = req.body;
 
-    const user = await store(
-      name,
-      email,
-      tech,
+    const createdUser = await create(
+      user
     );
 
-    return res.json(user);
+    return res.json(createdUser);
   },
   async show(req, res) {
     const { id } = req.params;

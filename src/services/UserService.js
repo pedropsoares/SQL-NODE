@@ -11,17 +11,16 @@ module.exports = {
 
     return user;
   },
-  async store(name, email, techs) {
-    const user = await User.create({
-      name,
-      email,
-    });
+  async create(user) {
+    const createdUser = await User.create(user);
+    const arrayTechs = user.techs.split(', ');
 
-    const names = techs.split(', ');
+    console.log(user.id)
 
-    await TechService.store(user.id, names);
+    await TechService.createMany(createdUser.id, arrayTechs)
 
-    return user;
+    return createdUser;
+
   },
   async show(user_id) {
     const user = await User.findByPk(user_id, {

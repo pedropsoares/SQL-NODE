@@ -7,10 +7,16 @@
         "airbnb-base"
     ],
     "parserOptions": {
-        "ecmaVersion": 2019,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "rules": {
-        "camelcase": "off"
+        "camelcase": "off",
+        "no-return-await": "off",
+        "no-restricted-globals": "off",
+        "no-global-assign": "off",
+        "no-undef": "off",
+        "no-console": "off",
+        "no-shadow": "off",
     }
 }
