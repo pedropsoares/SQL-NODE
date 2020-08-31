@@ -15,8 +15,6 @@ module.exports = {
     const createdUser = await User.create(user);
     const arrayTechs = user.techs.split(', ');
 
-    console.log(user.id)
-
     await TechService.createMany(createdUser.id, arrayTechs)
 
     return createdUser;
