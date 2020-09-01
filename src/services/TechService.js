@@ -2,8 +2,12 @@ const Tech = require('../models/Tech');
 const User = require('../models/User');
 
 module.exports = {
-  async createMany(user_id, arrayTechs) {
+  async createMany(techs) {
 
+    return await Tech.bulkCreate(techs);
+  },
+
+  async AddTech(user_id, arrayTechs) {
     if (arrayTechs && arrayTechs.length) {
       const techs = await Tech.bulkCreate(
         arrayTechs.map((name) => ({ name })),

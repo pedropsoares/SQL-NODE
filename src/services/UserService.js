@@ -15,10 +15,19 @@ module.exports = {
     const createdUser = await User.create(user);
     const arrayTechs = user.techs.split(', ');
 
-    await TechService.createMany(createdUser.id, arrayTechs)
+    if (arrayTechs && arrayTechs.length) {
+      const techs = await TechService.createMany(
+        arrayTechs.map((name) => ({ name })),
+      );
 
-    return createdUser;
+      techs.forEach(async (tech) => {
+        await createdUser.addTechs(tech)
+      });
 
+      await TechService.createMany(createdUser.id, arrayTechs)
+
+      return createdUser;
+    }
   },
   async show(user_id) {
     const user = await User.findByPk(user_id, {

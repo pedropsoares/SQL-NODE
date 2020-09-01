@@ -1,4 +1,4 @@
-const { createMany } = require('../services/TechService');
+const TechService = require('../services/TechService');
 
 module.exports = {
   async store(req, res) {
@@ -8,7 +8,7 @@ module.exports = {
     const arrayTechs = techs.split(', ');
 
     try {
-      const response = await createMany(user_id, arrayTechs);
+      const response = await TechService.AddTech(user_id, arrayTechs);
       return res.json(response);
     } catch (error) {
       return res.status(400).send(error);
